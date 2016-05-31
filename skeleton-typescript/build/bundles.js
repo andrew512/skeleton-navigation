@@ -10,7 +10,7 @@ module.exports = {
         "inject": true,
         "minify": true,
         "depCache": true,
-        "rev": false
+        "rev": true
       }
     },
     "dist/aurelia": {
@@ -29,13 +29,14 @@ module.exports = {
         "aurelia-logging-console",
         "bootstrap",
         "bootstrap/css/bootstrap.css!text",
-        "jquery"
+        "jquery",
+        "fetch"
       ],
       "options": {
         "inject": true,
         "minify": true,
         "depCache": false,
-        "rev": false
+        "rev": true
       }
     }
   }
