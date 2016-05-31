@@ -14,34 +14,34 @@ var typescript = require('gulp-tsb');
 // https://www.npmjs.com/package/gulp-plumber
 var typescriptCompiler = typescriptCompiler || null;
 gulp.task('build-system', function () {
-  if (!typescriptCompiler) {
-    typescriptCompiler = typescript.create(require('../../tsconfig.json').compilerOptions);
-  }
-  return gulp.src(paths.dtsSrc.concat(paths.source))
-    .pipe(plumber())
-    .pipe(sourcemaps.init({loadMaps: true}))
-    .pipe(typescriptCompiler())
-    // todo AC 2016-05-31: Disabling inline sourcemaps for now, because something in the
-    // chain is adding duplicate and conflicting `sourceMappingURL` properties into
-    // the "compiled" fields, causing problems for the bundler. Using external
-    // source map files solves the issue for now.
-    // .pipe(sourcemaps.write({includeContent: false, sourceRoot: '/src'}))
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest(paths.output));
+    if (!typescriptCompiler) {
+        typescriptCompiler = typescript.create(require('../../tsconfig.json').compilerOptions);
+    }
+    return gulp.src(paths.dtsSrc.concat(paths.source))
+        .pipe(plumber())
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(typescriptCompiler())
+        // todo AC 2016-05-31: Disabling inline sourcemaps for now, because something in the
+        // chain is adding duplicate and conflicting `sourceMappingURL` properties into
+        // the "compiled" fields, causing problems for the bundler. Using external
+        // source map files solves the issue for now.
+        // .pipe(sourcemaps.write({includeContent: false, sourceRoot: '/src'}))
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest(paths.output));
 });
 
 // copies changed html files to the output directory
 gulp.task('build-html', function () {
-  return gulp.src(paths.html)
-    .pipe(changed(paths.output, {extension: '.html'}))
-    .pipe(gulp.dest(paths.output));
+    return gulp.src(paths.html)
+        .pipe(changed(paths.output, {extension: '.html'}))
+        .pipe(gulp.dest(paths.output));
 });
 
 // copies changed css files to the output directory
 gulp.task('build-css', function () {
-  return gulp.src(paths.css)
-    .pipe(changed(paths.output, {extension: '.css'}))
-    .pipe(gulp.dest(paths.output));
+    return gulp.src(paths.css)
+        .pipe(changed(paths.output, {extension: '.css'}))
+        .pipe(gulp.dest(paths.output));
 });
 
 // this task calls the clean task (located
@@ -49,9 +49,9 @@ gulp.task('build-css', function () {
 // and build-html tasks in parallel
 // https://www.npmjs.com/package/gulp-run-sequence
 gulp.task('build', function (callback) {
-  return runSequence(
-    'clean',
-    ['build-system', 'build-html', 'build-css'],
-    callback
-  );
+    return runSequence(
+        'clean',
+        ['build-system', 'build-html', 'build-css'],
+        callback
+    );
 });
