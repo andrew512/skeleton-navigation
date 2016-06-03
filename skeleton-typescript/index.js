@@ -3,10 +3,9 @@
 
 'use strict';
 
-var app = require('app');
-var BrowserWindow = require('browser-window');
-
-require('crash-reporter').start();
+var electron = require('electron');
+var app = electron.app;
+var BrowserWindow = electron.BrowserWindow;
 
 var mainWindow = null;
 
@@ -22,7 +21,7 @@ app.on('ready', function () {
         height: 600
     });
 
-    mainWindow.loadUrl('file://' + __dirname + '/index.html');
+    mainWindow.loadURL('file://' + __dirname + '/index.html');
     mainWindow.webContents.on('did-finish-load', function () {
         mainWindow.setTitle(app.getName());
     });
